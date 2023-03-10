@@ -11,19 +11,28 @@ namespace api.Controllers
     [ApiController]
     public class QrController : ControllerBase
     {
-        [HttpGet(Name = "GetQrResult")]
-        public QrCodeResult Get(QrCodeRequest qrCodeRequest)
+        private readonly ILogger _logger;
+
+        public QrController(ILogger<QrController> logger)
         {
-            QrCodeResult qrCodeResult = new QrCodeResult();
-            qrCodeResult.Result = "Hello";
+            _logger = logger;
+        }
 
-            MessagingToolkit.QRCode.Codec.QRCodeDecoder t = new MessagingToolkit.QRCode.Codec.QRCodeDecoder();
+        [HttpPost(Name = "GetQrResult")]
+        public string Get(string requestString)
+        {
+            //QrCodeResult qrCodeResult = new QrCodeResult();
+            //qrCodeResult.Result = "Hello";
 
-           Bitmap
-            QRCodeBitmapImage bit = new QRCodeBitmapImage(qrCodeRequest.Code);
+            // MessagingToolkit.QRCode.Codec.QRCodeDecoder t = new MessagingToolkit.QRCode.Codec.QRCodeDecoder();
 
-            t.Decode(bit);
-            return qrCodeResult;       
+            //Bitmap
+            // QRCodeBitmapImage bit = new QRCodeBitmapImage(qrCodeRequest.Code);
+
+            // t.Decode(bit);
+            //EventLog
+            _logger.LogInformation(requestString);
+            return requestString;       
         }
     }
 }
