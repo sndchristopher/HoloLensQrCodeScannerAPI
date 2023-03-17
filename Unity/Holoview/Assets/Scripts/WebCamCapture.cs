@@ -7,6 +7,8 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows.WebCam;
+using UnityEngine.WSA;
+
 public class WebCamCapture : MonoBehaviour
 {
     PhotoCapture photoCaptureObject = null;
@@ -98,7 +100,8 @@ public class WebCamCapture : MonoBehaviour
             }
             else
             {
-                Debug.Log(www.downloadHandler.data);
+                Debug.Log(www.downloadHandler.text);
+                Launcher.LaunchUri(www.downloadHandler.text, false);
             }
         }
     }
