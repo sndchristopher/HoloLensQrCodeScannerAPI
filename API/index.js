@@ -32,9 +32,12 @@ app.post('/qr', async (req, res) => {
     qrCodeInstance.callback = function (err, qrCodeValue) {
         if (err) {
             console.error(err);
+            res.status(400).send("No QrCode found");
+            return;
         }
-
-        console.log(qrCodeValue);
+    
+            console.log(qrCodeValue.result);
+            res.send(qrCodeValue.result);    
     };
 
     qrCodeInstance.decode(qrCodeImage.bitmap);
