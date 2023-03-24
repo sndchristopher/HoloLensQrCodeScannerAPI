@@ -16,6 +16,7 @@ public class WebCamCapture : MonoBehaviour
     PhotoCapture photoCaptureObject = null;
     Texture2D targetTexture = null;
     Resolution cameraResolution;
+    string ipAddress = "";
 
     // Use this for initialization
     void Start()
@@ -43,6 +44,7 @@ public class WebCamCapture : MonoBehaviour
 
     public static void SetIpAddress(string ipAddress)
     {
+        WebCamCapture.instance.ipAddress = ipAddress;
         StartCapturing();
     }
 
@@ -72,7 +74,7 @@ public class WebCamCapture : MonoBehaviour
         qrCodeRequest.qrCode = bytes;
         string jsonData = JsonUtility.ToJson(qrCodeRequest);
         Debug.Log(jsonData);
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.31.81:3000/Qr", jsonData))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://" + ipAddress + ":3000/Qr", jsonData))
         {
             www.SetRequestHeader("content-type", "application/json");
             www.uploadHandler.contentType = "application/json";
