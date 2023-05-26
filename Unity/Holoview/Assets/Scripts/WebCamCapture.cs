@@ -38,8 +38,13 @@ public class WebCamCapture : MonoBehaviour
             // Activate the camera
             photoCaptureObject.StartPhotoModeAsync(cameraParameters, delegate (PhotoCapture.PhotoCaptureResult result)
             {
+#if UNITY_EDITOR
+                WebCamCapture.SetIpAddress("192.168.31.81");
+#endif
             });
         });
+
+
     }
 
     public static void SetIpAddress(string ipAddress)
